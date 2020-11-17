@@ -1,0 +1,25 @@
+$colors: (
+    primary: #005DFF,
+    accent: #FFF6BB
+);
+
+body, html {
+    height:100vh;
+}
+
+body {
+    background-color: white;
+    margin: 0;
+    padding:0;
+
+    #bg {
+        background-color: map-get($colors, primary);
+        // Clip path link: https://bennettfeely.com/clippy/
+        clip-path: polygon(100% 0, 100% 68%, 64% 100%, 0 100%, 0 0);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index:1;
+    }
+   
+}
