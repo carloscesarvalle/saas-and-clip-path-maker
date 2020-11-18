@@ -1,25 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
+// variables
 $colors: (
-    primary: #005DFF,
-    accent: #FFF6BB
-);
+    primary: #4b7ccf,
+    primary-light: lighten(#4b7ccf, 40%),
+    primary-darker: darker(#4b7ccf, 40%),
+    accent: #FFF6BB,
+    base-color: white,
+    logo-color: white,
+    tagline-color: white,
+); 
+
+$borders: 15px;
+
+//function to simplify using color variables. Instead of using get-map on each element you can use name-of-function($function-parameter), for example: background-color: colors($color-name)
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}
+
+
+*, 
+::before, 
+::after {
+    font-family: 'Inter', sans-serif,
+}
 
 body, html {
     height:100vh;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: white;
+    background-color:color(base-color);
     margin: 0;
     padding:0;
 
     #bg {
-        background-color: map-get($colors, primary);
+        background-color: color(primary);
         // Clip path link: https://bennettfeely.com/clippy/
-        clip-path: polygon(100% 0, 100% 68%, 64% 100%, 0 100%, 0 0);
+        clip-path: polygon(100% 0, 100% 79%, 64% 100%, 0 100%, 0 0);
         width: 100%;
         height: 100%;
         position: absolute;
         z-index:1;
     }
-   
+
+    header .logo {
+        display:block;
+        color: color(logo-color);
+        font-size: 1.25rem;
+        text-decoration: none;
+        text-transform: uppercase ;
+        margin: 2rem;
+    } 
+}
+
+.container {
+    background-color: color(base-color); 
+    width:80%;
+    margin: 2em auto;
+    padding: 20px;
+    border-radius: $borders;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    list-style-type: none;
+
+    span {
+        background-color:color(primary-light);  
+        border-radius: 50%;
+        height: 1em;
+        width: 1em;
+        position: absolute;
+    }
+
+    p {
+        margin-left: 2rem;
+
+    }
+}
+
+h1, h3 {
+    color: color(tagline-color);
+    margin: 3rem 2rem;
+    text-align: center;
+
+    
+}
+
+h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    line-height: 1.1em;
+}
+
+h3 {
+    font-size: 1.25rem; 
+    font-weight: 400;   
+}
+
+a.button {
+    color: color(primary-darker);
+    background-color: color(accent);
+    padding: 1.15em 3.25em;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.8rem;
+    border-radius: $borders;
+    margin: 50px 2rem;
+    display: block;
 }
