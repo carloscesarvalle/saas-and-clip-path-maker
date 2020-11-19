@@ -46,7 +46,9 @@ body .logo {
 
 @media (min-width: 1200px) {
   body .logo {
-    grid-area: logo;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-area: logo 1 / 1 / 2 / 2;
   }
 }
 
@@ -59,15 +61,17 @@ body main {
   body main {
     display: -ms-grid;
     display: grid;
-    grid-template: "logo" 10%, "primary card" 90% / 1fr 1fr;
-    gap: 2rem;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "logo" 10% "primary card" 90%;
+    gap: 2rem 8rem;
   }
 }
 
 body main .card {
   background-color: white;
   position: relative;
-  padding: 1.5em 1.5em;
+  padding: 1.5rem 1.5rem;
   border-radius: 15px;
   -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -76,14 +80,14 @@ body main .card {
 
 @media (min-width: 1200px) {
   body main .card {
-    grid-area: card;
     text-align: left;
-    -ms-grid-row: 2;
-    -ms-grid-row-span: 1;
-    grid-row: 2/3;
+    grid-area: card;
     -ms-grid-column: 2;
     -ms-grid-column-span: 1;
-    grid-column: 2/3;
+    grid-column: 2 / 3;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
@@ -114,20 +118,20 @@ body main .card ul p {
 @media (min-width: 1200px) {
   body main .primary {
     margin: 4rem 0 0 4rem;
+    text-align: left;
     grid-area: primary;
-    -ms-grid-row: 2;
-    -ms-grid-row-span: 1;
-    grid-row: 2/3;
     -ms-grid-column: 1;
     -ms-grid-column-span: 1;
-    grid-column: 1/2;
+    grid-column: 1 / 2;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
     -ms-flex-item-align: center;
         -ms-grid-row-align: center;
         align-self: center;
-    text-align: left;
   }
 }
 
