@@ -19,6 +19,13 @@ $borders: 15px;
     @return map-get($colors, $color-name)
 }
 
+$desktop: 1200px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
 
 *, 
 ::before, 
@@ -34,7 +41,7 @@ body, html {
 body {
     background-color:color(base-color);
     margin: 0;
-    padding:0;
+    padding: 0;
 
     #bg {
         background-color: color(primary);
@@ -43,70 +50,120 @@ body {
         width: 100%;
         height: 100%;
         position: absolute;
-        z-index:1;
+        z-index: -1;
+        @include desktop {
+            clip-path: polygon(0 0, 76% 0, 50% 100%, 0% 100%);
+        }
     }
 
-    header .logo {
+    .logo {
         display:block;
         color: color(logo-color);
         font-size: 1.25rem;
         text-decoration: none;
         text-transform: uppercase ;
-        margin: 2rem;
+        padding: 4rem 4rem;
+        font-weight: 600;
+        @include desktop {
+            grid-area: logo;
+        }
     } 
-}
+ 
+    main {
+        text-align: center;
+        margin: 2em 4em;
+        @include desktop {
+        display: grid;
+        grid-template: 
+        "logo" 10%,
+        "primary card" 90% /
+        1fr 1fr;
+        gap: 2rem;
+        }
 
-.container {
-    background-color: color(base-color); 
-    width:80%;
-    margin: 2em auto;
-    padding: 20px;
-    border-radius: $borders;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    list-style-type: none;
+        .card {
+            background-color: color(base-color); 
+            position: relative;
+            padding: 1.5em 1.5em;
+            border-radius: $borders;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            list-style-type: none;
+            @include desktop {
+                grid-area: card;
+                text-align: left;
+                grid-row: 2/3;
+                grid-column: 2/3;
+                height: fit-content;
+                align-self: center;
+            }
 
-    span {
-        background-color:color(primary-light);  
-        border-radius: 50%;
-        height: 1em;
-        width: 1em;
-        position: absolute;
+                ul {
+                    list-style-type: none;
+                
+        
+                    span {
+                        background-color:color(primary-light);  
+                        border-radius: 50%;
+                        height: 1em;
+                        width: 1em;
+                        position: absolute;
+                        left: 1.75rem;
+                    }
+        
+                    p   {
+                        text-align: left;
+                        margin-left: 1rem
+                    }
+        
+                }
+        }
+
+
+        .primary {
+            @include desktop {
+                margin: 4rem 0 0 4rem;
+                grid-area: primary;
+                grid-row: 2/3;
+                grid-column: 1/2;
+                height: fit-content;
+                align-self: center;
+                text-align: left;
+            }
+
+            h1 { 
+                color: color(tagline-color);   
+                font-size: 4em;
+                text-transform: uppercase;
+                line-height: 1.1em;
+                margin: 6rem 0 3rem 0;
+            }
+            
+            h3 {
+                color: color(tagline-color);
+                font-size: 1.25rem; 
+                font-weight: 400; 
+            }
+            
+            a.button {
+                color: color(primary-darker);
+                background-color: color(accent);
+                padding: 1.5em 3.25em;
+                text-decoration: none;
+                text-transform: uppercase;
+                text-align: center;
+                font-size: 0.9rem;
+                font-weight: 400;
+                border-radius: $borders;
+                margin: 6em auto;
+                display: block;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                width: 50%;
+                @include desktop {
+                    margin: 6em 0;
+                }
+            }
+        }
+
+
     }
-
-    p {
-        margin-left: 2rem;
-
-    }
-}
-
-h1, h3 {
-    color: color(tagline-color);
-    margin: 3rem 2rem;
-    text-align: center;
-
-    
-}
-
-h1 {
-    font-size: 3em;
-    text-transform: uppercase;
-    line-height: 1.1em;
-}
-
-h3 {
-    font-size: 1.25rem; 
-    font-weight: 400;   
-}
-
-a.button {
-    color: color(primary-darker);
-    background-color: color(accent);
-    padding: 1.15em 3.25em;
-    text-decoration: none;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 0.8rem;
-    border-radius: $borders;
-    margin: 50px 2rem;
-    display: block;
 }
